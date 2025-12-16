@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aha-ggregator | Wow Moments for Growth</title>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --surface: #ffffff;
+            --text: #18181b;
+            --text-muted: #71717a;
+            --border: #e4e4e7;
+            --border-light: #f4f4f5;
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+
+            /* Semantic colors - subtle, purposeful */
+            --wow: #7c3aed;
+            --wow-soft: #f5f3ff;
+            --how: #ca8a04;
+            --how-soft: #fefce8;
+            --what: #0891b2;
+            --what-soft: #ecfeff;
+
+            /* AI brand colors - muted for professionalism */
+            --claude: #c2410c;
+            --chatgpt: #059669;
+            --gemini: #2563eb;
+            --grok: #18181b;
+            --perplexity: #7c3aed;
+            --general: #71717a;
+
+            /* Growth levers */
+            --activation: #059669;
+            --retention: #2563eb;
+            --differentiation: #dc2626;
+            --b2b: #ca8a04;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .last-updated {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Purpose block */
+        .purpose {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .purpose-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .purpose p {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .purpose p:last-child {
+            margin-bottom: 0;
+        }
+
+        .purpose strong {
+            font-weight: 600;
+        }
+
+        .purpose .metrics {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Insights dashboard */
+        .insights-dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .insights-dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .insight-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .insight-card h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .insight-list .count {
+            background: var(--border-light);
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Filters */
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .filter-btn {
+            padding: 0.4rem 0.85rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.15s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--text-muted);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--text);
+            color: var(--surface);
+            border-color: var(--text);
+        }
+
+        /* Cards */
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 900px) {
+            .card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-main {
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .layer-tag {
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .layer-tag.wow { background: var(--wow-soft); color: var(--wow); }
+        .layer-tag.how { background: var(--how-soft); color: var(--how); }
+        .layer-tag.what { background: var(--what-soft); color: var(--what); }
+
+        .ai-tag {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: var(--border-light);
+            color: var(--text-muted);
+        }
+
+        .source-tag {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        .use-case {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .quote {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .meta-row {
+            font-size: 0.85rem;
+        }
+
+        .meta-row a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .meta-row a:hover {
+            text-decoration: underline;
+        }
+
+        /* Strategy sidebar */
+        .card-strategy {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 900px) {
+            .card-strategy {
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+        }
+
+        .strategy-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .strategy-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .strategy-content {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .provocation {
+            background: var(--how-soft);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .growth-tags {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .growth-tag {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .growth-tag.activation { background: #d1fae5; color: #065f46; }
+        .growth-tag.retention { background: #dbeafe; color: #1e40af; }
+        .growth-tag.differentiation { background: #fee2e2; color: #991b1b; }
+        .growth-tag.b2b { background: #fef3c7; color: #92400e; }
+
+        /* Search section */
+        .search-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .search-section h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-section p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .search-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.15s ease;
+        }
+
+        .search-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Aha-ggregator</h1>
+            <p class="tagline">Mining the "Wow" layer for Growth</p>
+            <p class="last-updated">Last updated: 2025-12-16 00:42 UTC · 15 moments collected</p>
+        </header>
+
+        <div class="purpose">
+            <div class="purpose-label">Why this exists</div>
+            <p><strong>The biggest activation friction is people's mental model.</strong> Users don't know what kind of collaborator AI can be, what it can actually do, or why it's worth their time.</p>
+            <p>This tool collects real "Wow" moments—when AI finally clicked for people—to inform show-don't-tell content patterns and surface what "getting it" actually looks like in the wild.</p>
+            <div class="metrics">Supports: Week 2 retention (34% → 37%), Advanced feature adoption (14% → 20%), Differentiation</div>
+        </div>
+
+        
+        <div class="insights-dashboard">
+            <div class="insight-card">
+                <h3>Emerging patterns</h3>
+                <ul class="insight-list">
+                    <li><span class="count">2×</span> "Trust" theme appears in realizations</li><li><span class="count">2×</span> "Time" theme appears in realizations</li><li><span class="count">1×</span> "Dialogue" theme appears in realizations</li><li><span class="count">1×</span> "Document" theme appears in realizations</li>
+                </ul>
+            </div>
+
+            <div class="insight-card">
+                <h3>Content gaps revealed</h3>
+                <ul class="insight-list">
+                    <li>No 'aha' stories about MCP or advanced features</li><li>B2B end-user moments are missing entirely</li><li>Claude Code 'wow' moments underrepresented</li><li>Upgrade-triggering moments not captured</li>
+                </ul>
+            </div>
+
+            <div class="insight-card">
+                <h3>Show-don't-tell opportunities</h3>
+                <ul class="insight-list">
+                    <li>'Upload your longest PDF' as onboarding prompt</li><li>Side-by-side comparison demos vs. competitors</li><li>'Have a conversation' vs. 'give commands'</li><li>Code that works on first try—showcase it</li>
+                </ul>
+            </div>
+        </div>
+    
+
+        <div class="filter-section">
+            <div class="filter-group">
+                <span class="filter-label">Layer</span>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="wow">Wow</button>
+                <button class="filter-btn" data-filter="how">How</button>
+                <button class="filter-btn" data-filter="what">What</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Growth lever</span>
+                <button class="filter-btn" data-growth="activation">Activation</button>
+                <button class="filter-btn" data-growth="retention">Retention</button>
+                <button class="filter-btn" data-growth="differentiation">Differentiation</button>
+                <button class="filter-btn" data-growth="b2b">B2B</button>
+            </div>
+        </div>
+
+        <div class="cards" id="cards-container">
+            
+            <!-- Card 1 -->
+            <div class="card" data-layer="wow" data-growth="differentiation activation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Claude</span>
+                        <span class="source-tag">Medium</span>
+                    </div>
+                    <div class="use-case">Conversational problem-solving</div>
+                    <p class="quote">After 100 failed prompts, I finally understood that Claude&#x27;s superpower isn&#x27;t being the perfect AI assistant. It&#x27;s being the perfect conversation partner. And that makes all the difference.</p>
+                    <div class="meta-row">
+                        <a href="https://medium.com/@reviewraccoon/after-100-failed-prompts-i-accidentally-finally-unlocked-claude-ais-superpower-324fcb37fe86" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">AI works best as dialogue, not commands</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">What if onboarding taught &#x27;conversation&#x27; not &#x27;prompting&#x27;?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag differentiation">Differentiation</span><span class="growth-tag activation">Activation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 2 -->
+            <div class="card" data-layer="wow" data-growth="differentiation activation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Claude</span>
+                        <span class="source-tag">Cohorte.co</span>
+                    </div>
+                    <div class="use-case">Document analysis</div>
+                    <p class="quote">For researchers, analysts, or anyone drowning in PDFs, Claude is a lifesaver. This is exactly where Claude stands out—I&#x27;m unable to reproduce this with any other AI tool under the sun with the same speed and accuracy.</p>
+                    <div class="meta-row">
+                        <a href="https://www.cohorte.co/letters/why-i-moved-half-of-my-ai-workflow-to-claude" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Long document comprehension is a superpower</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">&#x27;Upload your longest PDF&#x27; could be a killer first prompt suggestion</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag differentiation">Differentiation</span><span class="growth-tag activation">Activation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 3 -->
+            <div class="card" data-layer="wow" data-growth="activation b2b">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Claude</span>
+                        <span class="source-tag">Medium</span>
+                    </div>
+                    <div class="use-case">Healthcare document summary</div>
+                    <p class="quote">I had a 130-page PDF full of dense healthcare policy stuff. Normally, I&#x27;d cry and try to fake my way through it. I uploaded it to Claude and within seconds, it broke it down into clear sections, bullet points and even suggested relevant headlines.</p>
+                    <div class="meta-row">
+                        <a href="https://medium.com/@Tech_resources/claude-ai-vs-chatgpt-my-honest-experience-using-both-and-which-one-id-recommend-d1b3f4273618" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">AI handles what would take hours in seconds</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">B2B onboarding prompt: &#x27;Upload your most dreaded document&#x27;</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span><span class="growth-tag b2b">B2B</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 4 -->
+            <div class="card" data-layer="wow" data-growth="differentiation retention">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Claude</span>
+                        <span class="source-tag">Digidop Agency</span>
+                    </div>
+                    <div class="use-case">Code generation</div>
+                    <p class="quote">Where ChatGPT often requires several iterations to achieve a satisfactory result, Claude usually arrives at the right solution on the first prompt—which translates to a considerable time saving.</p>
+                    <div class="meta-row">
+                        <a href="https://www.digidop.com/blog/claude-vs-chatgpt" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">First-try accuracy creates trust and saves time</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">Can we show &#x27;iterations saved&#x27; as a value metric in-product?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag differentiation">Differentiation</span><span class="growth-tag retention">Retention</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 5 -->
+            <div class="card" data-layer="what" data-growth="differentiation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag what">What</span>
+                        <span class="ai-tag">Claude</span>
+                        <span class="source-tag">Medium</span>
+                    </div>
+                    <div class="use-case">Mental model shift</div>
+                    <p class="quote">One prompt revealed a fundamental difference. ChatGPT felt like a very sophisticated search engine with conversation capabilities. Claude felt like a thinking partner with genuine analytical abilities.</p>
+                    <div class="meta-row">
+                        <a href="https://medium.com/@reviewraccoon/this-is-the-exact-prompt-that-made-me-switch-from-chatgpt-to-claude-ai-indefinitely-0a54a0636657" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Different AIs have fundamentally different &#x27;personalities&#x27;</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">&#x27;Search engine vs. thinking partner&#x27;—is this our positioning?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag differentiation">Differentiation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 6 -->
+            <div class="card" data-layer="wow" data-growth="activation b2b">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Perplexity</span>
+                        <span class="source-tag">Fast Company</span>
+                    </div>
+                    <div class="use-case">Deep research automation</div>
+                    <p class="quote">Perplexity&#x27;s Deep Research feature is a game changer for content creators, journalists, and researchers who work under tight deadlines. It completes research that used to take all-nighters for term papers—in 3 minutes.</p>
+                    <div class="meta-row">
+                        <a href="https://www.fastcompany.com/91355910/perplexitys-new-ai-features-are-a-game-changer-heres-how-to-make-the-most-of-them" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Time compression is the ultimate value prop</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">&#x27;3 minutes vs. all-nighter&#x27;—do we quantify time savings in our messaging?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span><span class="growth-tag b2b">B2B</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 7 -->
+            <div class="card" data-layer="wow" data-growth="activation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Claude</span>
+                        <span class="source-tag">Leon Furze</span>
+                    </div>
+                    <div class="use-case">Computer use / automation</div>
+                    <p class="quote">This third experiment is where everything became a little bit more real. This was my ChatGPT moment—watching AI actually control a computer and complete tasks.</p>
+                    <div class="meta-row">
+                        <a href="https://leonfurze.com/2024/10/28/claude-computer-use-and-the-next-chatgpt-moment/" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">AI agents doing real work changes everything</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">Computer Use needs its own &#x27;first wow&#x27; demo moment</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 8 -->
+            <div class="card" data-layer="wow" data-growth="activation differentiation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Perplexity</span>
+                        <span class="source-tag">Techpoint Africa</span>
+                    </div>
+                    <div class="use-case">Research workflow</div>
+                    <p class="quote">This knowledge retrieval tool has changed how I gather information, cross-check facts, and put together research. I save half of my time by fact-checking and verifying sources, especially when writing technical articles.</p>
+                    <div class="meta-row">
+                        <a href="https://techpoint.africa/guide/my-perplexity-ai-review/" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Citations create trust—the &#x27;source of truth&#x27; feeling</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">How visible are Claude&#x27;s sources? Citation transparency drives trust.</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span><span class="growth-tag differentiation">Differentiation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 9 -->
+            <div class="card" data-layer="what" data-growth="differentiation activation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag what">What</span>
+                        <span class="ai-tag">Claude</span>
+                        <span class="source-tag">Medium</span>
+                    </div>
+                    <div class="use-case">AI personalities</div>
+                    <p class="quote">AI models like ChatGPT, Claude, and Perplexity aren&#x27;t just different algorithms—they&#x27;re distinct products with carefully designed personalities. ChatGPT acts like an eager assistant, Claude like a thoughtful mentor, Perplexity like a diligent researcher.</p>
+                    <div class="meta-row">
+                        <a href="https://medium.com/@nhungphnguyen/ai-models-as-products-why-chatgpt-claude-and-perplexity-feel-so-different-7b0857609293" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Choose AI by personality, not just capability</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">&#x27;Thoughtful mentor&#x27;—can we lean into this in onboarding copy?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag differentiation">Differentiation</span><span class="growth-tag activation">Activation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 10 -->
+            <div class="card" data-layer="wow" data-growth="activation retention">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Gemini</span>
+                        <span class="source-tag">Sid Bharath</span>
+                    </div>
+                    <div class="use-case">Bug-free development</div>
+                    <p class="quote">The amazing thing was all my time was spent just adding new features and updating UI/UX, instead of fighting bugs because there were none! I cannot express how incredible it is that Gemini could build and expand on a codebase like this without it falling apart.</p>
+                    <div class="meta-row">
+                        <a href="https://www.siddharthbharath.com/gemini-3-pro/" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Zero bugs = flow state maintained = magic feeling</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">&#x27;Fighting bugs&#x27; is the enemy—can we position AI as &#x27;bug eliminator&#x27;?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span><span class="growth-tag retention">Retention</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 11 -->
+            <div class="card" data-layer="wow" data-growth="activation retention">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Grok</span>
+                        <span class="source-tag">Rudrank Riyam</span>
+                    </div>
+                    <div class="use-case">Code development speed</div>
+                    <p class="quote">The first thing that seriously impressed me with Grok Code fast is just how damn fast it is. When I switched to it from Claude models, the difference was immediate and noticeable. Grok Code fast is still my favorite model of 2025.</p>
+                    <div class="meta-row">
+                        <a href="https://rudrank.com/exploring-cursor-grok-code-fast-model-experience" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Speed creates a viscerally different experience</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">Is &#x27;fast enough to not break flow&#x27; a UX priority we&#x27;re underweighting?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span><span class="growth-tag retention">Retention</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 12 -->
+            <div class="card" data-layer="how" data-growth="activation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag how">How</span>
+                        <span class="ai-tag">General</span>
+                        <span class="source-tag">Substack</span>
+                    </div>
+                    <div class="use-case">Learning and education</div>
+                    <p class="quote">The moment I realized my friend was wrong about ChatGPT—it wasn&#x27;t about the AI being smart or dumb. It was about learning how to have a productive conversation with it.</p>
+                    <div class="meta-row">
+                        <a href="https://aiforlifelonglearners.substack.com/p/the-moment-i-realized-my-friend-was" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">The user is part of the equation</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">Cold-start problem: users blame AI when they don&#x27;t know how to use it</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 13 -->
+            <div class="card" data-layer="how" data-growth="activation retention">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag how">How</span>
+                        <span class="ai-tag">ChatGPT</span>
+                        <span class="source-tag">Creator Economy</span>
+                    </div>
+                    <div class="use-case">Daily personal assistant</div>
+                    <p class="quote">For everyday personal assistance—quick questions, brainstorming, image generation—ChatGPT is the workhorse. The voice mode and memory features make it feel like having a personal assistant in your pocket.</p>
+                    <div class="meta-row">
+                        <a href="https://creatoreconomy.so/p/chatgpt-vs-claude-vs-gemini-the-best-ai-model-for-each-use-case-2025" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">AI as daily companion, not just a tool</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">What&#x27;s Claude&#x27;s &#x27;pocket assistant&#x27; moment? Voice + memory?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag activation">Activation</span><span class="growth-tag retention">Retention</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 14 -->
+            <div class="card" data-layer="wow" data-growth="differentiation">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag wow">Wow</span>
+                        <span class="ai-tag">Grok</span>
+                        <span class="source-tag">Lex Fridman</span>
+                    </div>
+                    <div class="use-case">General reasoning</div>
+                    <p class="quote">I got to use Grok 3 extensively. My mind is blown, very impressive model. What truly impressed me was its ability to analyze cultural references—it understood and explained niche 90s sitcom jokes in a disturbingly insightful way.</p>
+                    <div class="meta-row">
+                        <a href="https://startupnews.fyi/2025/02/19/grok-3-launch-early-users-share-their-experience-with-elon-musks-smartest-chatbot/" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Cultural fluency surprises users—it feels &#x27;human&#x27;</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">Cultural understanding is a differentiator—do we showcase Claude&#x27;s personality enough?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag differentiation">Differentiation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 15 -->
+            <div class="card" data-layer="what" data-growth="differentiation b2b">
+                <div class="card-main">
+                    <div class="card-header">
+                        <span class="layer-tag what">What</span>
+                        <span class="ai-tag">Grok</span>
+                        <span class="source-tag">DataCamp</span>
+                    </div>
+                    <div class="use-case">Chain-of-thought reasoning</div>
+                    <p class="quote">Grok has been strong on math and programming in my tests, and I&#x27;ve been impressed by the quality of its chain-of-thought reasoning, which shows an ingenious and logically sound approach to problem-solving.</p>
+                    <div class="meta-row">
+                        <a href="https://latenode.com/blog/grok-3-review" target="_blank">Read full story →</a>
+                    </div>
+                </div>
+                <div class="card-strategy">
+                    <div class="strategy-section">
+                        <div class="strategy-label">The realization</div>
+                        <div class="strategy-content">Visible reasoning builds confidence in AI outputs</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Provocation</div>
+                        <div class="provocation">Extended thinking as visible &#x27;aha&#x27;—show Claude&#x27;s reasoning more?</div>
+                    </div>
+                    <div class="strategy-section">
+                        <div class="strategy-label">Growth levers</div>
+                        <div class="growth-tags">
+                            <span class="growth-tag differentiation">Differentiation</span><span class="growth-tag b2b">B2B</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+
+        <div class="search-section">
+            <h2>Find more aha moments</h2>
+            <p>Pre-built searches to discover more breakthrough stories:</p>
+            <div class="search-links">
+                <a href="https://www.reddit.com/search/?q=%22aha%20moment%22%20AI%20OR%20ChatGPT%20OR%20Claude&type=link&sort=relevance" target="_blank" class="search-link">Reddit: "aha moment"</a>
+                <a href="https://www.reddit.com/search/?q=%22finally%20clicked%22%20AI%20OR%20LLM&type=link&sort=relevance" target="_blank" class="search-link">Reddit: "finally clicked"</a>
+                <a href="https://www.reddit.com/search/?q=%22game%20changer%22%20Claude%20OR%20ChatGPT%20OR%20Gemini&type=link&sort=relevance" target="_blank" class="search-link">Reddit: "game changer"</a>
+                <a href="https://hn.algolia.com/?q=aha%20moment%20AI%20LLM" target="_blank" class="search-link">Hacker News</a>
+                <a href="https://www.google.com/search?q=site:substack.com+%22changed+how+I%22+AI" target="_blank" class="search-link">Substack</a>
+                <a href="https://www.youtube.com/results?search_query=%22AI+changed+everything%22+workflow" target="_blank" class="search-link">YouTube</a>
+                <a href="https://twitter.com/search?q=%22blown%20away%22%20(claude%20OR%20chatgpt%20OR%20gemini%20OR%20grok)&src=typed_query&f=live" target="_blank" class="search-link">X / Twitter</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>A tool for understanding what "getting it" looks like—informing show-don't-tell content patterns.</p>
+            <p style="margin-top: 0.5rem;">Part of the <strong>What / How / Wow</strong> framework for content design and activation.</p>
+        </footer>
+    </div>
+
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
+        const growthBtns = document.querySelectorAll('.filter-btn[data-growth]');
+        const cards = document.querySelectorAll('.card');
+
+        let activeLayerFilter = 'all';
+        let activeGrowthFilters = new Set();
+
+        function applyFilters() {
+            cards.forEach(card => {
+                const cardLayer = card.dataset.layer;
+                const cardGrowth = card.dataset.growth || '';
+
+                let layerMatch = activeLayerFilter === 'all' || cardLayer === activeLayerFilter;
+                let growthMatch = activeGrowthFilters.size === 0 ||
+                    [...activeGrowthFilters].some(g => cardGrowth.includes(g));
+
+                card.style.display = (layerMatch && growthMatch) ? 'grid' : 'none';
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeLayerFilter = btn.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        growthBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const growth = btn.dataset.growth;
+                if (activeGrowthFilters.has(growth)) {
+                    activeGrowthFilters.delete(growth);
+                    btn.classList.remove('active');
+                } else {
+                    activeGrowthFilters.add(growth);
+                    btn.classList.add('active');
+                }
+                applyFilters();
+            });
+        });
+    </script>
+</body>
+</html>
